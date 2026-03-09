@@ -149,7 +149,7 @@ The system follows a **three-layer microservices architecture**:
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/WeigaungLi/rydr.git
+git clone https://github.com/weiguangli-o/rydr.git
 cd rydr
 ```
 
