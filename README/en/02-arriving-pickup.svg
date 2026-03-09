@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480" font-family="'Segoe UI', Roboto, Arial, sans-serif">
+  <rect width="800" height="480" fill="#f5f5f5" rx="8"/>
+
+  <!-- Passenger App -->
+  <g transform="translate(20, 20)">
+    <rect width="370" height="440" fill="#fff" rx="12" stroke="#e0e0e0"/>
+    <rect width="370" height="50" fill="#4CAF93" rx="12 12 0 0"/>
+    <rect y="38" width="370" height="12" fill="#4CAF93"/>
+    <text x="185" y="32" text-anchor="middle" fill="#fff" font-size="16" font-weight="600">Online Taxi — Passenger</text>
+    <!-- Map -->
+    <rect x="15" y="60" width="340" height="240" fill="#e8f5e9" rx="6" stroke="#c8e6c9"/>
+    <text x="185" y="140" text-anchor="middle" fill="#81c784" font-size="13">Map View</text>
+    <!-- Pickup marker -->
+    <rect x="100" y="160" width="120" height="28" fill="#4CAF93" rx="4"/>
+    <text x="160" y="179" text-anchor="middle" fill="#fff" font-size="12" font-weight="600">Pick up here</text>
+    <!-- Car icon indicator -->
+    <rect x="200" y="200" width="50" height="24" fill="#FF9800" rx="4"/>
+    <text x="225" y="216" text-anchor="middle" fill="#fff" font-size="10">Driver</text>
+    <!-- Bottom tabs -->
+    <g transform="translate(15, 310)">
+      <text x="0" y="14" fill="#4CAF93" font-size="12" font-weight="600">Now</text>
+      <text x="55" y="14" fill="#888" font-size="12">Reserve</text>
+      <text x="120" y="14" fill="#888" font-size="12">Airport</text>
+      <text x="190" y="14" fill="#888" font-size="12">Delivery</text>
+      <text x="265" y="14" fill="#888" font-size="12">Charter</text>
+    </g>
+    <!-- Addresses -->
+    <circle cx="30" cy="350" r="5" fill="#4CAF93"/>
+    <text x="45" y="354" fill="#333" font-size="11">Wangjing West Rd, Chaoyang, Beijing</text>
+    <circle cx="30" cy="375" r="5" fill="#f44336"/>
+    <text x="45" y="379" fill="#333" font-size="11">Nanhu Zhongyuan #316, Bldg 3, Rm 301-07</text>
+  </g>
+
+  <!-- Driver App -->
+  <g transform="translate(410, 20)">
+    <rect width="370" height="440" fill="#fff" rx="12" stroke="#e0e0e0"/>
+    <rect width="370" height="50" fill="#4CAF93" rx="12 12 0 0"/>
+    <rect y="38" width="370" height="12" fill="#4CAF93"/>
+    <text x="185" y="32" text-anchor="middle" fill="#fff" font-size="16" font-weight="600">Go to Pick Up Passenger</text>
+    <!-- Map -->
+    <rect x="15" y="60" width="340" height="240" fill="#e8f5e9" rx="6" stroke="#c8e6c9"/>
+    <text x="185" y="140" text-anchor="middle" fill="#81c784" font-size="13">Map — Route to Passenger</text>
+    <!-- Passenger marker -->
+    <rect x="120" y="110" width="130" height="26" fill="#2196F3" rx="4"/>
+    <text x="185" y="128" text-anchor="middle" fill="#fff" font-size="11" font-weight="600">Passenger Pickup</text>
+    <!-- Addresses -->
+    <circle cx="30" cy="325" r="5" fill="#4CAF93"/>
+    <text x="45" y="329" fill="#333" font-size="11">Wangjing West Rd, Chaoyang, Beijing</text>
+    <circle cx="30" cy="350" r="5" fill="#f44336"/>
+    <text x="45" y="354" fill="#333" font-size="11">Nanhu Zhongyuan #316, Bldg 3, Rm 301-07</text>
+    <!-- Action button -->
+    <rect x="30" y="380" width="310" height="45" fill="#4CAF93" rx="8"/>
+    <text x="185" y="408" text-anchor="middle" fill="#fff" font-size="15" font-weight="600">Arrived at Pickup Point</text>
+  </g>
+</svg>

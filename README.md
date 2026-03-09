@@ -149,7 +149,7 @@ The system follows a **three-layer microservices architecture**:
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/OiPunk/rydr.git
+git clone https://github.com/weiguangli-io/rydr.git
 cd rydr
 ```
 
@@ -271,37 +271,190 @@ rydr/                                    # Repository root
 <details>
 <summary><strong>Passenger Login & Registration</strong></summary>
 
-![Passenger Login Register Sequence](README/passenger-login-register-sequence.png)
+```mermaid
+sequenceDiagram
+    actor User as Client
+    participant AP as api-passenger
+    participant SVC as service-verification-code
+    participant SPU as service-passenger-user
+
+    User->>AP: Login/Register request
+    AP->>SVC: Verify code request
+    SVC->>SVC: Validate phone + code
+    SVC-->>AP: Verification result
+    AP->>SPU: Login/Register request
+    SPU->>SPU: Login/Register operation
+    SPU-->>AP: Login/Register result
+    AP-->>User: Login/Register result
+```
+
 </details>
 
 <details>
 <summary><strong>Verification Code Flow</strong></summary>
 
-![Verification Code Sequence](README/verification-code-sequence.png)
+```mermaid
+sequenceDiagram
+    actor User as API Client
+    participant AP as api-passenger
+    participant SVC as service-verification-code
+    participant SMS as service-sms
+
+    User->>AP: Request verification code
+    AP->>SVC: Get verification code
+    SVC->>SVC: Generate code & cache it
+    SVC-->>AP: Return code
+    AP->>SMS: Request to send code via SMS
+    SMS->>SMS: Send SMS & save record
+    SMS-->>AP: Return send result
+    AP-->>User: Response: success or failure
+```
+
 </details>
 
 <details>
 <summary><strong>Driver Workflow</strong></summary>
 
-![Driver Sequence](README/driver-sequence.png)
+```mermaid
+sequenceDiagram
+    actor Driver as Driver App
+    participant AD as api-driver
+    participant SVC as service-verification-code
+    participant SMS as service-sms
+    participant SDU as service-driver-user
+    participant SO as service-order
+    participant SW as service-wallet
+
+    Driver->>AD: Request verification code
+    AD->>SVC: Get code
+    SVC-->>AD: Return code
+    AD->>SMS: Send code via SMS
+    SMS-->>AD: Send result
+    Driver->>AD: Verify code
+    AD-->>Driver: Verification result
+    AD->>AD: Generate token
+
+    AD->>SDU: Get driver info
+    SDU-->>AD: Return driver info
+    AD->>SDU: Update driver info
+    SDU-->>AD: Return update result
+
+    AD->>SDU: Get driver work status
+    SDU-->>AD: Return status
+    AD->>SDU: Update work status
+    SDU-->>AD: Return result
+
+    AD->>SO: Get order count
+    SO-->>AD: Return count
+    AD->>SW: Get wallet stats
+    SW-->>AD: Return stats
+
+    Note over Driver,AD: New order arrives
+    AD->>SO: Accept order
+    SO-->>AD: Return result
+    AD-->>Driver: Notify passenger
+
+    AD->>SO: Update trip status
+    SO-->>AD: Return
+
+    Note over Driver,AD: Trip completed
+    Driver->>Driver: Collect payment from passenger
+```
+
 </details>
 
 <details>
 <summary><strong>Passenger Order Flow</strong></summary>
 
-![Passenger Order Sequence](README/passenger-order-sequence.png)
+```mermaid
+sequenceDiagram
+    actor User as Client
+    participant AP as api-passenger
+    participant SO as service-order
+    participant SV as service-valuation
+    participant SD as service-order-dispatch
+
+    User->>AP: Request current timestamp
+    AP-->>User: Return timestamp
+
+    User->>AP: Pre-order check
+    AP->>SO: Check unpaid orders
+    SO-->>AP: Return info
+    AP-->>User: Return check result
+
+    User->>AP: Request fare estimate
+    AP->>SV: Calculate estimated fare
+    SV-->>AP: Return estimate
+    AP-->>User: Return info
+
+    User->>AP: Place order
+    AP->>SO: Create order
+    SO->>SD: Dispatch to driver
+    SD-->>SO: Return success/failure
+    SO-->>AP: Return info
+    AP-->>User: Return info
+    Note right of SD: Push to driver
+
+    loop Poll order status
+        User->>AP: Query order status
+        AP->>SO: Query order status
+        SO-->>AP: Return status
+        AP-->>User: Return info
+    end
+```
+
 </details>
 
 <details>
 <summary><strong>Profile Update</strong></summary>
 
-![Passenger Profile Update Sequence](README/passenger-profile-update-sequence.png)
+```mermaid
+sequenceDiagram
+    actor User as Client
+    participant AP as api-passenger
+    participant SPU as service-passenger-user
+    participant AB as api-boss
+
+    User->>AP: Get profile
+    AP->>SPU: Query user info
+    SPU-->>AP: Return
+    AB->>SPU: Get user info
+    SPU-->>AB: Return
+    AP-->>User: Return
+
+    User->>AP: Update profile
+    AP->>SPU: Update user info
+    AB->>SPU: Update user info
+    SPU-->>AP: Return
+    SPU-->>AB: Return
+    AP-->>User: Return
+```
+
 </details>
 
 <details>
 <summary><strong>Address Management</strong></summary>
 
-![Passenger Address Management](README/passenger-address-management-sequence.png)
+```mermaid
+sequenceDiagram
+    actor User as Client
+    participant AP as api-passenger
+    participant SPU as service-passenger-user
+    participant AB as api-boss
+
+    User->>AP: Get passenger addresses
+    AP->>SPU: Get address info
+    AB->>SPU: Get address info
+    SPU-->>AP: Return address info
+    SPU-->>AB: Return address info
+    AP-->>User: Return address info
+
+    User->>AP: Update address info
+    AP->>SPU: Update address info
+    SPU-->>AP: Return address info
+    AP-->>User: Return result
+```
+
 </details>
 
 ## Demo Screenshots
@@ -309,26 +462,26 @@ rydr/                                    # Repository root
 <details>
 <summary><strong>Click to view order lifecycle screenshots</strong></summary>
 
-### Dispatch & Accept Order
-<img src="README/image-20200813210408997.png" alt="Dispatch and Accept Order" width="600" />
+### 1. Dispatch & Accept Order
+<img src="README/en/01-dispatch-accept.svg" alt="Dispatch and Accept Order" width="700" />
 
-### Arriving at Pickup Location
-<img src="README/image-20200813210543356.png" alt="Arriving at Pickup Location" width="600" />
+### 2. Arriving at Pickup Location
+<img src="README/en/02-arriving-pickup.svg" alt="Arriving at Pickup Location" width="700" />
 
-### Passenger Picked Up
-<img src="README/image-20200813210824474.png" alt="Passenger Picked Up" width="600" />
+### 3. Passenger Picked Up
+<img src="README/en/03-passenger-picked-up.svg" alt="Passenger Picked Up" width="700" />
 
-### Journey Started
-<img src="README/image-20200813210912209.png" alt="Journey Started" width="600" />
+### 4. Journey Started
+<img src="README/en/04-journey-started.svg" alt="Journey Started" width="700" />
 
-### Destination Reached
-<img src="README/image-20200813211005619.png" alt="Destination Reached" width="600" />
+### 5. Destination Reached
+<img src="README/en/05-destination-reached.svg" alt="Destination Reached" width="700" />
 
-### Payment Initiated
-<img src="README/image-20200813211327043.png" alt="Payment Initiated" width="600" />
+### 6. Payment Initiated
+<img src="README/en/06-payment-initiated.svg" alt="Payment Initiated" width="700" />
 
-### Payment Received
-<img src="README/image-20200813211449976.png" alt="Payment Received" width="600" />
+### 7. Payment Received
+<img src="README/en/07-payment-received.svg" alt="Payment Received" width="700" />
 
 </details>
 

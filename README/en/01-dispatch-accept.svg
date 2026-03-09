@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480" font-family="'Segoe UI', Roboto, Arial, sans-serif">
+  <!-- Background -->
+  <rect width="800" height="480" fill="#f5f5f5" rx="8"/>
+
+  <!-- Passenger App -->
+  <g transform="translate(20, 20)">
+    <rect width="370" height="440" fill="#fff" rx="12" stroke="#e0e0e0" stroke-width="1"/>
+    <!-- Header -->
+    <rect width="370" height="50" fill="#4CAF93" rx="12 12 0 0"/>
+    <rect y="38" width="370" height="12" fill="#4CAF93"/>
+    <text x="185" y="32" text-anchor="middle" fill="#fff" font-size="16" font-weight="600">Online Taxi — Passenger</text>
+    <!-- Map placeholder -->
+    <rect x="15" y="60" width="340" height="220" fill="#e8f5e9" rx="6" stroke="#c8e6c9"/>
+    <text x="185" y="150" text-anchor="middle" fill="#81c784" font-size="13">Map View</text>
+    <!-- Loading spinner indicator -->
+    <circle cx="185" cy="180" r="20" fill="none" stroke="#4CAF93" stroke-width="3" stroke-dasharray="20,10"/>
+    <text x="185" y="215" text-anchor="middle" fill="#4CAF93" font-size="13" font-weight="600">Waiting for driver to accept...</text>
+    <!-- Addresses -->
+    <circle cx="30" cy="305" r="6" fill="#4CAF93"/>
+    <text x="45" y="309" fill="#333" font-size="12">Pickup: Wangjing West Rd, Chaoyang, Beijing</text>
+    <circle cx="30" cy="335" r="6" fill="#f44336"/>
+    <text x="45" y="339" fill="#333" font-size="12">Dropoff: Nanhu Zhongyuan #316, Bldg 3, Rm 301-07</text>
+    <!-- Button -->
+    <rect x="30" y="370" width="310" height="45" fill="#4CAF93" rx="8"/>
+    <text x="185" y="398" text-anchor="middle" fill="#fff" font-size="15" font-weight="600">Request Ride</text>
+  </g>
+
+  <!-- Driver App -->
+  <g transform="translate(410, 20)">
+    <rect width="370" height="440" fill="#fff" rx="12" stroke="#e0e0e0" stroke-width="1"/>
+    <!-- Header -->
+    <rect width="370" height="50" fill="#4CAF93" rx="12 12 0 0"/>
+    <rect y="38" width="370" height="12" fill="#4CAF93"/>
+    <text x="185" y="32" text-anchor="middle" fill="#fff" font-size="16" font-weight="600">Online Taxi — Driver</text>
+    <!-- Order card -->
+    <rect x="20" y="70" width="330" height="90" fill="#fff3e0" rx="8" stroke="#ffe0b2"/>
+    <text x="35" y="95" fill="#e65100" font-size="13" font-weight="600">Real-time: 2.8 km away | Est. fare: 32 CNY</text>
+    <circle cx="35" cy="118" r="5" fill="#4CAF93"/>
+    <text x="48" y="122" fill="#555" font-size="12">From: Wangjing West Rd, Chaoyang, Beijing</text>
+    <circle cx="35" cy="141" r="5" fill="#f44336"/>
+    <text x="48" y="145" fill="#555" font-size="12">To: Nanhu Zhongyuan #316, Bldg 3, Rm 301-07</text>
+    <!-- Accept button -->
+    <circle cx="185" cy="310" r="70" fill="#4CAF93"/>
+    <circle cx="185" cy="310" r="65" fill="#43A087"/>
+    <text x="185" y="318" text-anchor="middle" fill="#fff" font-size="22" font-weight="700">ACCEPT</text>
+  </g>
+</svg>
